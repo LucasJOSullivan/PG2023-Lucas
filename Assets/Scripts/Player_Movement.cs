@@ -19,7 +19,7 @@ public class Player_Movement : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    { 
         if (Input.GetKey(KeyCode.LeftShift) && (!Input.GetKey(KeyCode.LeftControl)))
         {
             speed = RUNNING_SPEED;
@@ -50,6 +50,8 @@ public class Player_Movement : MonoBehaviour
             transform.position += speed * transform.right * Time.deltaTime;
         }
 
+        transform.Rotate(Vector3.up, Input.GetAxis("Horizontal"));
+        camera.UpdatePosition(this, Input.GetAxis("Vertical"));
     }
 
     // FixedUpdate is called once per game tick
