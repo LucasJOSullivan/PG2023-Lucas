@@ -18,14 +18,21 @@ public class Bullet_Script : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+    }
+
+    void FixedUpdate()
+    {
         if (live = false)
-        {
+        {            
             Destroy(this);
         }
     }
-    void OnCollisionEnter (Collision collision)
+
+    void OnCollisionEnter(Collision collision)
     {
+
         live = false;
-        
     }
+
 }
