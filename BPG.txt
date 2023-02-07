@@ -1,0 +1,4 @@
+Bullet Physics Goals:
+1. Apply velocity for a fraction of a second, after which the bullet is in freefall
+2. Apply drag while the bullet is in freefall
+3. Prevent drag from creating negative velocity
