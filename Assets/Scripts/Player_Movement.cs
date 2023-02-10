@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Player_Movement : MonoBehaviour
 {
+    public Transform spawnpoint, bulletCloneTemplate;
     FPSCameraScript camera;
     private float speed;
     private float turnSpeed;
@@ -48,6 +49,11 @@ public class Player_Movement : MonoBehaviour
         if (Input.GetKey(KeyCode.D))
         {
             transform.position += speed * transform.right * Time.deltaTime;
+        }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            Instantiate(bulletCloneTemplate, spawnpoint.position, spawnpoint.rotation);
         }
 
         transform.Rotate(Vector3.up, Input.GetAxis("Horizontal"));
