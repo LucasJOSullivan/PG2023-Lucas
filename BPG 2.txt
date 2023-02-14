@@ -1,0 +1,6 @@
+Movement speed of bullet spawn point affects bullet velocity
+
+On impact:
+- Tracer quickly fades out
+- Emissiveness quickly fades out
+- Bullet slowly fades out, and then despawns
