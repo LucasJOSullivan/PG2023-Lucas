@@ -4,18 +4,31 @@ using UnityEngine;
 
 public class FRID_Bullet_Script : MonoBehaviour
 {
+    CapsuleCollider ccp;
+    CapsuleCollider ccc;
     Rigidbody rb;
+    Light li;
+
     bool live, freefall;
-    float dragsum, drag, xspeed, yspeed, zspeed;
+    float dragsum, drag, xspeed, yspeed, zspeed, lifetime;
     Vector3 velocity, gravity;
+    private float timer;
+
     //public ConstantForce gravity;
 
     // Start is called before the first frame update
     void Start()
     {
+        live = true;
+        lifetime = 100;
         freefall = false;
+        ccp = GetComponent<CapsuleCollider>();
+        ccc = GetComponentInChildren<CapsuleCollider>();
         rb = GetComponentInChildren<Rigidbody>();
-        zspeed = 250.00f;
+        li = GetComponentInChildren<Light>();
+
+
+        zspeed = 100.00f;
         rb.velocity = transform.forward * zspeed;
 
 
@@ -37,31 +50,49 @@ public class FRID_Bullet_Script : MonoBehaviour
 
 
     void FixedUpdate()
-    {
+    {        
+        timer += Time.deltaTime;
+        ccp.enabled = true;
+        ccc.enabled = true;
         while (freefall == false)
+        
         {
+            /*
             rb.AddForce(0, 0, zspeed, ForceMode.VelocityChange);
+            */
             freefall = true;
+            
+        }
+
+        if (live == false)
+        {
+            lifetime = Mathf.Lerp(1, 0, timer);
+            li.intensity = Mathf.Lerp(1, 0, timer * 4);
+        }
+
+        if (lifetime == 0)
+        {
+            Destroy(gameObject);
         }
 
         //WaitForSeconds;
-        rb.AddForce(new Vector3(0.00f, -9.81f, 0.00f));
-        /*
+        //rb.AddForce(0f, rb.mass * -9.81f, 0f);
 
-            if (live = false)
+        /*
+        if (live == false)
             {            
                 Destroy(this);
             }
-        }
         */
-
-
-        void OnCollisionEnter(Collision collision)
-        {
-            freefall = true;
-            //    live = false;
         }
+ 
 
+    void OnCollisionEnter(Collision collision)
+    {
+        if (live == true)
+        {
+            live = false;
+        }
+    }
 
     }
-}
