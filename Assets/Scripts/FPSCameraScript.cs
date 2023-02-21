@@ -20,7 +20,7 @@ public class FPSCameraScript : MonoBehaviour
 
     }
 
-    internal void UpdatePosition(Player_Movement myMan,  float vertical)
+    internal void UpdatePosition(Player_Control myMan,  float vertical)
     {
         transform.position = myMan.transform.position + Vector3.up;
         //transform.rotation = myMan.transform.rotation;

@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player_Movement : MonoBehaviour
+public class Player_Control : MonoBehaviour
 {
-    public Transform spawnpoint, bulletCloneTemplate;
+    IShoot myGun;
+    //public Transform spawnpoint, bulletCloneTemplate;
     FPSCameraScript camera;
     private float speed;
     private float turnSpeed;
@@ -16,6 +17,8 @@ public class Player_Movement : MonoBehaviour
         speed = WALKING_SPEED;
         turnSpeed = WALKING_TURN;
         camera = FindObjectOfType<FPSCameraScript>();
+
+        myGun = camera.GetComponentInChildren<IShoot>();
     }
 
     // Update is called once per frame
@@ -53,8 +56,19 @@ public class Player_Movement : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            Instantiate(bulletCloneTemplate, spawnpoint.position, spawnpoint.rotation);
+            myGun.triggerPressed();
         }
+
+        if (!Input.GetMouseButton(0))
+        {
+            myGun.triggerReleased();
+        }
+
+        if (Input.GetMouseButton(0))
+        {
+            myGun.triggerHeld();
+        }
+
 
         transform.Rotate(Vector3.up, Input.GetAxis("Horizontal"));
         camera.UpdatePosition(this, Input.GetAxis("Vertical"));
