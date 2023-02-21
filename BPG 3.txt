@@ -1,0 +1,5 @@
+Point weapon so that projectile spawn point is perfectly aligned with point of aim
+
+Gun controls apply to guns instead of to player camera
+
+Multiple versions of gun control script
