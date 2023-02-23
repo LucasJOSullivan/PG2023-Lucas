@@ -5,6 +5,10 @@ using UnityEngine;
 public class BF_Weapon_Control : MonoBehaviour, IShoot
 
 {
+    public AudioSource audioSource;
+    public AudioClip clip;
+    public float volume = 0.5f;
+
     int burst_count, burst_limit;
     bool trigger_held;
     float reburst_delay, refire_delay;
@@ -15,9 +19,10 @@ public class BF_Weapon_Control : MonoBehaviour, IShoot
         trigger_held = true;
         if ((refire_delay <= 0.0f) && (burst_count < burst_limit))
         {
-                Instantiate(bulletCloneTemplate, spawnpoint.position, spawnpoint.rotation);
-                burst_count += 1;
-                refire_delay = 0.076923076923f;
+            Instantiate(bulletCloneTemplate, spawnpoint.position, spawnpoint.rotation);
+            audioSource.PlayOneShot(clip, volume);
+            burst_count += 1;
+            refire_delay = 0.076923076923f;
         }
     }
 
