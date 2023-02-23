@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class FA_Weapon_Control : MonoBehaviour, IShoot
 {
+    public AudioSource audioSource;
+    public AudioClip audioClip;
+    public float volume = 0.5f;
+
     float refire_delay;
     public Transform spawnpoint, bulletCloneTemplate;
 
@@ -12,6 +16,7 @@ public class FA_Weapon_Control : MonoBehaviour, IShoot
         if (refire_delay <= 0.0f)
         {
             Instantiate(bulletCloneTemplate, spawnpoint.position, spawnpoint.rotation);
+            audioSource.PlayOneShot(audioClip, volume);
             refire_delay = 0.1f;
         }
     }

@@ -5,6 +5,10 @@ using UnityEngine;
 
 public class SA_Weapon_Control : MonoBehaviour, IShoot
 {
+    public AudioSource audioSource;
+    public AudioClip audioClip;
+    public float volume = 0.5f;
+
     public Transform spawnpoint, bulletCloneTemplate;
     private bool triggerAlreadyPressed = false;
     private int counter, checkCounter = 0;
@@ -32,6 +36,7 @@ public class SA_Weapon_Control : MonoBehaviour, IShoot
     private void fireBullet()
     {
         Instantiate(bulletCloneTemplate, spawnpoint.position, spawnpoint.rotation);
+        audioSource.PlayOneShot(audioClip, volume);
         triggerAlreadyPressed = true;
     }
 

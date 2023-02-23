@@ -6,7 +6,7 @@ public class BF_Weapon_Control : MonoBehaviour, IShoot
 
 {
     public AudioSource audioSource;
-    public AudioClip clip;
+    public AudioClip audioClip;
     public float volume = 0.5f;
 
     int burst_count, burst_limit;
@@ -20,7 +20,7 @@ public class BF_Weapon_Control : MonoBehaviour, IShoot
         if ((refire_delay <= 0.0f) && (burst_count < burst_limit))
         {
             Instantiate(bulletCloneTemplate, spawnpoint.position, spawnpoint.rotation);
-            audioSource.PlayOneShot(clip, volume);
+            audioSource.PlayOneShot(audioClip, volume);
             burst_count += 1;
             refire_delay = 0.076923076923f;
         }
