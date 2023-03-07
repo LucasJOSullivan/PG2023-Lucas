@@ -59,16 +59,15 @@ public class Player_Control : MonoBehaviour
             myGun.triggerPressed();
         }
 
-        if (!Input.GetMouseButton(0))
-        {
-            myGun.triggerReleased();
-        }
-
         if (Input.GetMouseButton(0))
         {
             myGun.triggerHeld();
         }
 
+        if (!Input.GetMouseButton(0))
+        {
+            myGun.triggerReleased();
+        }
 
         transform.Rotate(Vector3.up, Input.GetAxis("Horizontal"));
         camera.UpdatePosition(this, Input.GetAxis("Vertical"));

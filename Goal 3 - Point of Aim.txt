@@ -1,0 +1,4 @@
+Point weapon so that projectile spawn point is perfectly aligned with point of aim (center of player's screen)
+
+Prevent player from firing weapon when weapon has too little space
+

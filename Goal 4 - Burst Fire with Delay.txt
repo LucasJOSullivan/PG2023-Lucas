@@ -1,0 +1,5 @@
+Enforce firing of minimum number of rounds per burst
+
+Prevent player from manually firing again until minimum number of rounds per burst have been fired
+
+Enforce delay between bursts

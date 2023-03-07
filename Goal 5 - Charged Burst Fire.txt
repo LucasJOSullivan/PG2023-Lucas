@@ -1,0 +1,5 @@
+Hold trigger to charge limited amount of rounds
+
+Release trigger to fire charged rounds
+
+Cannot charge rounds after trigger release until all charged rounds have been fired
