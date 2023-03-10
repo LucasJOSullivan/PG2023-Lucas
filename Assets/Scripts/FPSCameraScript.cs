@@ -22,6 +22,8 @@ public class FPSCameraScript : MonoBehaviour
         /*
         Ray pointerRay = new Ray(transform.position, Vector3.forward);
         RaycastHit hit;
+
+        if 
         //if (Physics.Raycast(pointerRay, transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerMask))
         if (Physics.Raycast(pointerRay, out hit, distance))
         {
