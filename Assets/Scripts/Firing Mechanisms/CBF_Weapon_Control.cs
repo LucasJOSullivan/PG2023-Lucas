@@ -14,7 +14,7 @@ public class CBF_Weapon_Control : MonoBehaviour, IShoot
 
     //int burst_count_to_min;
     int burst_count_to_max;
-    public int maxRoundsPerBurst;
+    public int maxRoundsPerBurst, roundsPerCharge;
     //public float  secondsToDrain, burstsPerSecond;
     public float secondsToRoundCharge, roundsPerSecond; 
     //float  drain_delay, reburst_delay;
@@ -86,8 +86,8 @@ public class CBF_Weapon_Control : MonoBehaviour, IShoot
                 if (trigger_held)
                 {
                     charge_timer = 0;
-                    currently = gunState.Charging;
                     burst_count_to_max = 0;
+                    currently = gunState.Charging;
                 }
 
 
@@ -99,8 +99,12 @@ public class CBF_Weapon_Control : MonoBehaviour, IShoot
                 {
                     if (burst_count_to_max > 0)
                     {
-                        currently = gunState.Firing;
+                        if ((burst_count_to_max > maxRoundsPerBurst) && (honorMaxRoundsPerBurst == true))
+                        {
+                            burst_count_to_max = maxRoundsPerBurst;
+                        }
                         charge_timer = 0;
+                        currently = gunState.Firing;
                     }
                     else
                     {
@@ -114,7 +118,7 @@ public class CBF_Weapon_Control : MonoBehaviour, IShoot
                     {
                         audioSource.PlayOneShot(chargeReport, audioVolume);
                         charge_timer = 0.0f;
-                        burst_count_to_max += 1;
+                        burst_count_to_max += roundsPerCharge;
                     }
 
                 }

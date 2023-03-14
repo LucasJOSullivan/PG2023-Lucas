@@ -1,0 +1,5 @@
+Once no shots have been fired within the last second, the next time a shot is fired, a 'center-point' is created whose orientation is based on that of the affected object.
+Every time a shot is fired, the affected object recoils in a random direction.
+If automatic recoil recovery is allowed: until the orientation of the affected object is aligned with that of the center-point, the affected object gradually rotates so that it is.
+The affected object may recoil only to a limited extent.
+The affected object may not recoil in opposite directions at once.
