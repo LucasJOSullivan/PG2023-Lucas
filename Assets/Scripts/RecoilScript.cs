@@ -5,15 +5,26 @@ using UnityEngine;
 
 public class RecoilScript : MonoBehaviour
 {
-    enum recoilState { None, Recoiling, Returning}
-
+    enum recoilState {None, Recoiling, Returning}
+    public float recoilTime = 0.02f, returnTime = 0.02f;
     Vector3 defaultPosition, startingPosition;
-    Quaternion defaultOrientation;
+    public Vector3 positionClamp;
+    Quaternion defaultOrientation, startingOrientation, destinationOrientation;
+    public Quaternion orientationClamp;
+
     recoilState currently = recoilState.None;
-    Vector3 destination;
-    Quaternion destinationOrientation, startingOrientation;
+    Vector3 destination;    
+    Aimpoint_Script aim;
+
+
 
     float timer;
+    /*
+      float fDefaultPosition, fStartingPosition, fDestinationOrientation, fStartingOrientation;
+    
+      public Vector3 recoilDirection1, recoilDirection2, recoilDirection3, recoilDirection4,
+        recoilDirection5, recoilDirection6, recoilDirection7, recoilDirection8;
+    //public Quaternion
     public bool allowAutoRotationRecovery, allowAutoMovementRecovery;
     public float cooldownTime, rotationClamp, movementClamp,
 
@@ -24,12 +35,16 @@ public class RecoilScript : MonoBehaviour
         forwardMovement, rearwardMovement, upwardMovement, rightwardMovement, downwardMovement, leftwardMovement,
         forwardMovementLimit, rearwardMovementLimit, upwardMovementLimit, rightwardMovementLimit, downwardMovementLimit, leftwardMovementLimit,
         forwardMovementChance, rearwardMovementChance, upwardMovementChance, rightwardMovementChance, downwardMovementChance, leftwardMovementChance;
+    */
 
 
     // Start is called before the first frame update
     void Start()
     {
+        //fDefaultPosition = defaultPosition;
         timer = 0.0f;
+        aim = GetComponentInChildren<Aimpoint_Script>();
+
     }
 
     // Update is called once per frame
@@ -40,12 +55,12 @@ public class RecoilScript : MonoBehaviour
         {
             case recoilState.Recoiling:
 
-                transform.localPosition = Vector3.Lerp(startingPosition, destination, timer);
-                transform.localRotation = Quaternion.Slerp(startingOrientation, destinationOrientation, timer);
+                transform.localPosition = Vector3.Lerp(startingPosition, destination, timer/recoilTime);
+                transform.localRotation = Quaternion.Slerp(startingOrientation, destinationOrientation, timer/recoilTime);
 
                 timer += Time.deltaTime;
 
-                if (timer >1 )
+                if (timer > recoilTime )
                 {
                     currently = recoilState.Returning;
 
@@ -62,15 +77,17 @@ public class RecoilScript : MonoBehaviour
             case recoilState.Returning:
 
 
-                transform.localPosition = Vector3.Lerp(startingPosition, destination, timer);
-                transform.localRotation = Quaternion.Slerp(startingOrientation, destinationOrientation, timer);
-
+                
+                transform.localPosition = Vector3.Lerp(startingPosition, destination, timer/returnTime);
+                transform.localRotation = Quaternion.Slerp(startingOrientation, destinationOrientation, timer/returnTime);
+                
                 timer += Time.deltaTime;
 
-                if (timer > 1)
+                if (timer > returnTime)
                 {
-                    transform.position = defaultPosition;
-                    transform.rotation = defaultOrientation;
+                    transform.localPosition = defaultPosition;
+                    transform.localRotation = defaultOrientation;
+                    aim.recoilOver();
                     currently = recoilState.None;
                 }
 
@@ -78,8 +95,6 @@ public class RecoilScript : MonoBehaviour
                 break;
 
         }
-
-
 
     }
 
@@ -90,7 +105,7 @@ public class RecoilScript : MonoBehaviour
         destination = getRandomRecoilPosition();
         startingPosition = transform.localPosition;
         startingOrientation = transform.localRotation;
-
+        aim.startingRecoil();
         destinationOrientation = getMaximumrecoilOrientation();
 
 
@@ -104,11 +119,11 @@ public class RecoilScript : MonoBehaviour
 
     private Quaternion getMaximumrecoilOrientation()
     {
-        return Quaternion.AngleAxis(45, transform.right);
+        return Quaternion.AngleAxis(-7.5f, Vector3.right);
     }
 
     private Vector3 getRandomRecoilPosition()
     {
-        return new Vector3(0, 1, -1);
+        return defaultPosition + new Vector3(0, -0.025f, 0.05f);
     }
 }

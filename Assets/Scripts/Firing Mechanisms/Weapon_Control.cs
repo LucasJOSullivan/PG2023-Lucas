@@ -7,6 +7,7 @@ public class Weapon_Control : MonoBehaviour, IShoot
     public AudioSource audioSource;
     public AudioClip muzzleReport;
     public float audioVolume = 0.5f;
+    RecoilScript recoilControl;
 
     //int burst_count_to_min;
     int burst_count_to_max;
@@ -27,6 +28,7 @@ public class Weapon_Control : MonoBehaviour, IShoot
         if ((refire_delay <= 0.0f) && (burst_count_to_max < maxRoundsPerBurst))
         //if ((refire_delay <= 0.0f) && (reburst_delay <= 0.0f))
         {
+            recoilControl.startRecoil();
             Instantiate(bulletCloneTemplate, spawnPoint.position, spawnPoint.rotation);
             audioSource.PlayOneShot(muzzleReport, audioVolume);
             refire_delay = (1 / roundsPerSecond);
@@ -60,6 +62,8 @@ public class Weapon_Control : MonoBehaviour, IShoot
     // Start is called before the first frame update
     void Start()
     {
+        recoilControl = GetComponent<RecoilScript>();
+        recoilControl.setDefaults(transform.localPosition, transform.localRotation);
         trigger_held = false;
         //burst_limit = 3;
         burst_count_to_max = 0;

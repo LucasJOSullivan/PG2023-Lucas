@@ -11,7 +11,7 @@ public class CBF_Weapon_Control : MonoBehaviour, IShoot
     enum gunState {Idle, Charging, Firing}
     gunState currently = gunState.Idle;
 
-
+    RecoilScript recoilControl;
     //int burst_count_to_min;
     int burst_count_to_max;
     public int maxRoundsPerBurst, roundsPerCharge;
@@ -68,6 +68,8 @@ public class CBF_Weapon_Control : MonoBehaviour, IShoot
     // Start is called before the first frame update
     void Start()
     {
+        recoilControl = GetComponent<RecoilScript>();
+        recoilControl.setDefaults(transform.localPosition, transform.localRotation);
         trigger_locked = false;
         
     }
@@ -132,6 +134,7 @@ public class CBF_Weapon_Control : MonoBehaviour, IShoot
 
                     if (charge_timer <= 0.0f)
                     {
+                        recoilControl.startRecoil();
                         Instantiate(bulletCloneTemplate, spawnPoint.position, spawnPoint.rotation);
                         audioSource.PlayOneShot(muzzleReport, audioVolume);
                         refire_delay = (1 / roundsPerSecond);

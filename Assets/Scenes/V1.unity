@@ -939,6 +939,8 @@ GameObject:
   m_Component:
   - component: {fileID: 549535244}
   - component: {fileID: 549535245}
+  - component: {fileID: 549535246}
+  - component: {fileID: 549535247}
   m_Layer: 6
   m_Name: Main Pointer
   m_TagString: Untagged
@@ -974,6 +976,44 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   secondsBetweenUpdates: 0.04
+--- !u!1818360609 &549535246
+RotationConstraint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 549535243}
+  m_Enabled: 0
+  m_Weight: 1
+  m_RotationAtRest: {x: 0, y: 0, z: 0}
+  m_RotationOffset: {x: 0, y: 0, z: 0}
+  m_AffectRotationX: 1
+  m_AffectRotationY: 1
+  m_AffectRotationZ: 1
+  m_IsContraintActive: 0
+  m_IsLocked: 1
+  m_Sources:
+  - sourceTransform: {fileID: 1540971567}
+    weight: 1
+--- !u!1818360608 &549535247
+PositionConstraint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 549535243}
+  m_Enabled: 0
+  m_Weight: 0.012
+  m_TranslationAtRest: {x: 0, y: 0, z: 2}
+  m_TranslationOffset: {x: 4.143, y: 1.538, z: 1.05}
+  m_AffectTranslationX: 1
+  m_AffectTranslationY: 1
+  m_AffectTranslationZ: 1
+  m_IsContraintActive: 1
+  m_IsLocked: 1
+  m_Sources:
+  - sourceTransform: {fileID: 1540971567}
+    weight: 1
 --- !u!1 &587137190
 GameObject:
   m_ObjectHideFlags: 0
@@ -2991,8 +3031,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1527011787}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.93, y: -0.5, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.93000007, y: -0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3145,46 +3185,15 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1540971566}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fd1855cd4a58c5840a936348d658d781, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allowAutoRotationRecovery: 0
-  allowAutoMovementRecovery: 0
-  cooldownTime: 0
-  rotationClamp: 0
-  movementClamp: 0
-  upwardRotation: 0
-  rightwardRotation: 0
-  downwardRotation: 0
-  leftwardRotation: 0
-  upwardRotationLimit: 0
-  rightwardRotationLimit: 0
-  downwardRotationLimit: 0
-  leftwardRotationLimit: 0
-  upwardRotationChance: 0
-  rightwardRotationChance: 0
-  downwardRotationChance: 0
-  leftwardRotationChance: 0
-  forwardMovement: 0
-  rearwardMovement: 0
-  upwardMovement: 0
-  rightwardMovement: 0
-  downwardMovement: 0
-  leftwardMovement: 0
-  forwardMovementLimit: 0
-  rearwardMovementLimit: 0
-  upwardMovementLimit: 0
-  rightwardMovementLimit: 0
-  downwardMovementLimit: 0
-  leftwardMovementLimit: 0
-  forwardMovementChance: 0
-  rearwardMovementChance: 0
-  upwardMovementChance: 0
-  rightwardMovementChance: 0
-  downwardMovementChance: 0
-  leftwardMovementChance: 0
+  recoilTime: 0.01
+  returnTime: 0.1
+  positionClamp: {x: 0, y: 0, z: 0}
+  orientationClamp: {x: 0, y: 0, z: 0, w: 0}
 --- !u!95 &1540971571
 Animator:
   serializedVersion: 4
@@ -3218,10 +3227,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 1890513922}
-  muzzleReport: {fileID: 0}
+  muzzleReport: {fileID: 8300000, guid: 8ae3aeaf9a0d8be4eba0908e81353f91, type: 3}
   audioVolume: 0.5
   maxRoundsPerBurst: 4
-  roundsPerSecond: 13
+  roundsPerSecond: 15
   honorMaxRoundsPerBurst: 0
   spawnPoint: {fileID: 1890513921}
   bulletCloneTemplate: {fileID: 8262790099877269713, guid: 3eccd23e2bc11d14483e2f3b2f93c9fa, type: 3}
@@ -4264,41 +4273,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd1855cd4a58c5840a936348d658d781, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allowAutoRotationRecovery: 0
-  allowAutoMovementRecovery: 0
-  cooldownTime: 0
-  rotationClamp: 0
-  movementClamp: 0
-  upwardRotation: 0
-  rightwardRotation: 0
-  downwardRotation: 0
-  leftwardRotation: 0
-  upwardRotationLimit: 0
-  rightwardRotationLimit: 0
-  downwardRotationLimit: 0
-  leftwardRotationLimit: 0
-  upwardRotationChance: 0
-  rightwardRotationChance: 0
-  downwardRotationChance: 0
-  leftwardRotationChance: 0
-  forwardMovement: 0
-  rearwardMovement: 0
-  upwardMovement: 0
-  rightwardMovement: 0
-  downwardMovement: 0
-  leftwardMovement: 0
-  forwardMovementLimit: 0
-  rearwardMovementLimit: 0
-  upwardMovementLimit: 0
-  rightwardMovementLimit: 0
-  downwardMovementLimit: 0
-  leftwardMovementLimit: 0
-  forwardMovementChance: 0
-  rearwardMovementChance: 0
-  upwardMovementChance: 0
-  rightwardMovementChance: 0
-  downwardMovementChance: 0
-  leftwardMovementChance: 0
+  recoilTime: 0.2
+  returnTime: 0.5
+  positionClamp: {x: 0, y: 0, z: 0}
+  orientationClamp: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &2030594061
 GameObject:
   m_ObjectHideFlags: 0
