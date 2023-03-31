@@ -12,16 +12,19 @@ public class FRID_Bullet_Script : MonoBehaviour
     bool live, freefall;
     float dragsum, drag, xspeed, yspeed, zspeed, lifetime;
     Vector3 velocity, gravity;
-    private float timer;
+    float damage;
+    private float timer, damage_reduction_delay;
 
     //public ConstantForce gravity;
 
     // Start is called before the first frame update
     void Start()
     {
+        damage = 17f;
         live = true;
         lifetime = 100;
         freefall = false;
+        damage_reduction_delay = 0.004f;
         ccp = GetComponent<CapsuleCollider>();
         ccc = GetComponentInChildren<CapsuleCollider>();
         rb = GetComponentInChildren<Rigidbody>();
@@ -68,8 +71,13 @@ public class FRID_Bullet_Script : MonoBehaviour
         {
             lifetime = Mathf.Lerp(1, 0, timer);
             li.intensity = Mathf.Lerp(1, 0, timer * 4);
+            damage_reduction_delay -= Time.deltaTime;
         }
 
+        if (damage_reduction_delay <= 0)
+        {
+            damage = 0f;
+        }    
         if (lifetime == 0)
         {
             Destroy(gameObject);
@@ -89,8 +97,18 @@ public class FRID_Bullet_Script : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
+        print("1");
         if (live == true)
         {
+            print("2");
+            IHealth objectHit = collision.transform.GetComponent<IHealth>();
+            print(collision.transform.name);
+            if (objectHit != null)
+            {
+                objectHit.takeDamage(damage);
+                print("3");
+            }
+
             live = false;
         }
     }
