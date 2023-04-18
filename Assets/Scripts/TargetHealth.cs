@@ -49,6 +49,6 @@ public class TargetHealth : MonoBehaviour, IHealth
 
     public void selfDestruct()
     {
-        Destroy(gameObject);
+        Destroy(transform.parent.gameObject);
     }
 }

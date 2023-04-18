@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Player_Control : MonoBehaviour
 {
+    bool controlEnabled;
     IShoot myGun;
     //public Transform spawnpoint, bulletCloneTemplate;
     FPSCameraScript camera;
@@ -14,6 +15,7 @@ public class Player_Control : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        controlEnabled = true;
         speed = WALKING_SPEED;
         turnSpeed = WALKING_TURN;
         camera = FindObjectOfType<FPSCameraScript>();
@@ -37,31 +39,34 @@ public class Player_Control : MonoBehaviour
             speed = WALKING_SPEED;
         }
 
-        if (Input.GetKey(KeyCode.W))
+        if (controlEnabled == true)
         {
-            transform.position += speed * transform.forward * Time.deltaTime;
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            transform.position -= speed * transform.right * Time.deltaTime;
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            transform.position -= speed * transform.forward * Time.deltaTime;
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            transform.position += speed * transform.right * Time.deltaTime;
-        }
+            if (Input.GetKey(KeyCode.W))
+            {
+                transform.position += speed * transform.forward * Time.deltaTime;
+            }
+            if (Input.GetKey(KeyCode.A))
+            {
+                transform.position -= speed * transform.right * Time.deltaTime;
+            }
+            if (Input.GetKey(KeyCode.S))
+            {
+                transform.position -= speed * transform.forward * Time.deltaTime;
+            }
+            if (Input.GetKey(KeyCode.D))
+            {
+                transform.position += speed * transform.right * Time.deltaTime;
+            }
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            myGun.triggerPressed();
-        }
+            if (Input.GetMouseButtonDown(0))
+            {
+                myGun.triggerPressed();
+            }
 
-        if (Input.GetMouseButton(0))
-        {
-            myGun.triggerHeld();
+            if (Input.GetMouseButton(0))
+            {
+                myGun.triggerHeld();
+            }
         }
 
         if (!Input.GetMouseButton(0))
@@ -71,6 +76,11 @@ public class Player_Control : MonoBehaviour
 
         transform.Rotate(Vector3.up, Input.GetAxis("Horizontal"));
         camera.UpdatePosition(this, Input.GetAxis("Vertical"));
+    }
+
+    void DisableControl()
+    {
+        controlEnabled = false;
     }
 
     // FixedUpdate is called once per game tick
