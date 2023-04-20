@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class TargetHealth : MonoBehaviour, IHealth
 {
+
+    public AudioSource source;
+    public AudioClip clip;
+    public float volume = 0.5f;
+
     float health;
     //string nameCheck;
-    MeshCollider detectCollider;   
+    MeshCollider detectCollider;
 
     // Start is called before the first frame update
     void Start()
@@ -44,11 +49,12 @@ public class TargetHealth : MonoBehaviour, IHealth
     public void takeDamage(float incomingDamage)
     {
         health -= incomingDamage;
-        print("4");
+        //print("4");
     }
 
     public void selfDestruct()
     {
-        Destroy(transform.parent.gameObject);
+        source.PlayOneShot(clip, volume);
+        //Destroy(transform.parent.gameObject);
     }
 }
