@@ -5,17 +5,18 @@ using TMPro;
 
 public class ScoreTracker : MonoBehaviour
 {
-    TMP_Text scoreText, subtext;
+    int score;
+    TMP_Text scoreText;
     // Start is called before the first frame update
     void Start()
     {
-
+        scoreText = GetComponent<TMP_Text>();
+        score = 69420;
     }
 
     // Update is called once per frame
     void Update()
     {
-        subtext.text = "1";
-        scoreText.text = "Score: " + subtext;
+        scoreText.text = "Score: " + score;
     }
 }

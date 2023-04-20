@@ -5,9 +5,10 @@ using TMPro;
 
 public class TimeKeeper : MonoBehaviour
 {
-    Player_Control player;
+    //Player_Control player;
     float maxTime = 90;
     float currentTime;
+    bool timerStopped;
 
 
     TMP_Text timeText;
@@ -23,11 +24,16 @@ public class TimeKeeper : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (timerStopped == false)
+        {
+            currentTime -= Time.deltaTime;
+        }
 
-        currentTime -= Time.deltaTime;
         timeText.text = "Time Remaining: " + currentTime.ToString("0.00") + "s";
         if (currentTime <= 0)
         {
+            currentTime = 0;
+            stopTimer();
             //Player_Control.DisableControl;
         }
         
@@ -36,6 +42,11 @@ public class TimeKeeper : MonoBehaviour
     internal void startTimer()
     {
         currentTime = maxTime;
+        timerStopped = false;
+    }
 
+    internal void stopTimer()
+    {
+        timerStopped = true;
     }
 }
