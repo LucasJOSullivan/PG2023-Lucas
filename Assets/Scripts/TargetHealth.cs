@@ -9,6 +9,8 @@ public class TargetHealth : MonoBehaviour, IHealth
     public AudioClip clip;
     public float volume = 0.5f;
 
+    ScoreTracker playerScore;
+
     float health;
     //string nameCheck;
     MeshCollider detectCollider;
