@@ -4,14 +4,18 @@ using UnityEngine;
 
 public class TargetHealth : MonoBehaviour, IHealth
 {
+    ScoreTracker playerScore;
 
     public AudioSource source;
     public AudioClip clip;
     public float volume = 0.5f;
+    float value;
 
-    ScoreTracker playerScore;
+    public Transform spawnPoint, template;
 
-    float health;
+
+
+    public float health;
     //string nameCheck;
     MeshCollider detectCollider;
 
@@ -56,7 +60,20 @@ public class TargetHealth : MonoBehaviour, IHealth
 
     public void selfDestruct()
     {
-        source.PlayOneShot(clip, volume);
-        //Destroy(transform.parent.gameObject);
+        //soundCount++;
+        //timeToLive -= Time.deltaTime;
+        /*
+        try
+        {
+            playerScore.addScore();
+        }
+        catch
+        {
+            print("Could not increment player score.");
+        }
+        */
+
+        Instantiate(template, spawnPoint.position, spawnPoint.rotation);
+        Destroy(transform.parent.gameObject);
     }
 }
