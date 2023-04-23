@@ -4,8 +4,16 @@ using UnityEngine;
 
 public class TargetHealth : MonoBehaviour, IHealth
 {
-    ScoreTracker playerScore;
+    ScoreTracker playerScore; 
+    GameObject scoreObject;
 
+
+
+
+
+
+//GetComponentByName<
+    //GameObject.Find("Score Display").GetComponent<ScoreTracker>();
     public AudioSource source;
     public AudioClip clip;
     public float volume = 0.5f;
@@ -22,6 +30,7 @@ public class TargetHealth : MonoBehaviour, IHealth
     // Start is called before the first frame update
     void Start()
     {
+        scoreObject = GameObject.Find("Score Display");
         health = 100f;
         //detectCollider = GetComponentInChildren<MeshCollider>;
         MeshCollider[] allColliders = GetComponentsInChildren<MeshCollider>();
@@ -45,24 +54,23 @@ public class TargetHealth : MonoBehaviour, IHealth
     // Update is called once per frame
     void Update()
     {
-        if (health <= 0f)
-        {
-            selfDestruct();
-        }
+
     }
 
 
     public void takeDamage(float incomingDamage)
     {
         health -= incomingDamage;
+        if (health <= 0f)
+        {
+            selfDestruct();
+        }
         //print("4");
     }
 
     public void selfDestruct()
     {
-        //soundCount++;
-        //timeToLive -= Time.deltaTime;
-        /*
+
         try
         {
             playerScore.addScore();
@@ -71,8 +79,6 @@ public class TargetHealth : MonoBehaviour, IHealth
         {
             print("Could not increment player score.");
         }
-        */
-
         Instantiate(template, spawnPoint.position, spawnPoint.rotation);
         Destroy(transform.parent.gameObject);
     }

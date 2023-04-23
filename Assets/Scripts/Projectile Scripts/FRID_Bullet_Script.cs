@@ -97,16 +97,16 @@ public class FRID_Bullet_Script : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        print("1");
+        //print("1");
         if (live == true)
         {
-            print("2");
+            //print("2");
             IHealth objectHit = collision.transform.GetComponent<IHealth>();
-            print(collision.transform.name);
+            //print(collision.transform.name);
             if (objectHit != null)
             {
                 objectHit.takeDamage(damage);
-                print("3");
+                //print("3");
             }
 
             live = false;
