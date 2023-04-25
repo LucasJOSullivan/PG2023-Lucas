@@ -43,7 +43,12 @@ public class ScoreTracker : MonoBehaviour
         scoreText.text = "Score: " + score;
     }
 
-    internal void getScore()
+    internal void hideScore()
+    {
+        scoreText.text = "";
+    }
+
+    public void getScore()
     {
         this.score = score;
     }

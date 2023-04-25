@@ -6,9 +6,10 @@ using TMPro;
 public class TimeKeeper : MonoBehaviour
 
 {
+    ScoreTracker scoreHide;
     EndCard endReport;
     Player_Control player;
-    float maxTime = 3;
+    float maxTime = 10;
     float currentTime;
     bool timerStopped;
 
@@ -17,7 +18,9 @@ public class TimeKeeper : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        scoreHide = FindObjectOfType<ScoreTracker>();
         player = FindObjectOfType<Player_Control>();
+
         endReport = FindObjectOfType<EndCard>();
         timeText = GetComponent<TMP_Text>();
         timeText.text= "Time Remaining: " + maxTime.ToString("0.00") + "s";
@@ -52,6 +55,8 @@ public class TimeKeeper : MonoBehaviour
     internal void stopTimer()
     {
         timerStopped = true;
+        timeText.text = "";
+        scoreHide.hideScore();
         player.disablePlayerControl();
     }
 }

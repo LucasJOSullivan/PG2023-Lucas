@@ -5,6 +5,7 @@ using TMPro;
 public class EndCard : MonoBehaviour
 {
     ScoreTracker scoreReport;
+    int endScore;
     TMP_Text cardText;
     // Start is called before the first frame update
     void Start()
@@ -22,7 +23,10 @@ public class EndCard : MonoBehaviour
 
     internal void showEndCard()
     {
-        scoreReport.getScore();
-        cardText.text = "Game Over \n\nYour score is: " + scoreReport.score;
+        /*
+        endScore = scoreReport.getScore();
+        endScore = scoreReport.score();
+        */
+        cardText.text = "Game Over \n\nYour score is: " /*+ scoreReport.score*/;
     }
 }
