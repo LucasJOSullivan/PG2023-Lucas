@@ -1,0 +1,4 @@
+When time remaing = 0:
+- Hide time and score widgets
+- Show endgame widget
+- Display score on endgame widget
