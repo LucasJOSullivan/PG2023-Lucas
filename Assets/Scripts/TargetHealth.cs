@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TargetHealth : MonoBehaviour, IHealth
 {
-    ScoreTracker playerScore; 
+    ScoreTracker playerScore;
     GameObject scoreObject;
 
 
@@ -30,6 +30,7 @@ public class TargetHealth : MonoBehaviour, IHealth
     // Start is called before the first frame update
     void Start()
     {
+        playerScore = FindObjectOfType<ScoreTracker>();
         scoreObject = GameObject.Find("Score Display");
         health = 100f;
         //detectCollider = GetComponentInChildren<MeshCollider>;
@@ -80,6 +81,8 @@ public class TargetHealth : MonoBehaviour, IHealth
             print("Could not increment player score.");
         }
         Instantiate(template, spawnPoint.position, spawnPoint.rotation);
+
+        FindObjectOfType<SpawnerScript>().IveBeenDestroyed(transform.parent);
         Destroy(transform.parent.gameObject);
     }
 }

@@ -4,10 +4,12 @@ using UnityEngine;
 using TMPro;
 public class EndCard : MonoBehaviour
 {
+    ScoreTracker scoreReport;
     TMP_Text cardText;
     // Start is called before the first frame update
     void Start()
     {
+        //scoreReport.
         cardText = GetComponent<TMP_Text>();
         cardText.text = "";
     }
@@ -16,5 +18,11 @@ public class EndCard : MonoBehaviour
     void Update()
     {
 
+    }
+
+    internal void showEndCard()
+    {
+        scoreReport.getScore();
+        cardText.text = "Game Over \n\nYour score is: " + scoreReport.score;
     }
 }

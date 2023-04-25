@@ -25,7 +25,7 @@ public class Player_Control : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    { 
+    {
         if (Input.GetKey(KeyCode.LeftShift) && (!Input.GetKey(KeyCode.LeftControl)))
         {
             speed = RUNNING_SPEED;
@@ -34,39 +34,42 @@ public class Player_Control : MonoBehaviour
         {
             speed = CROUCH_SPEED;
         }
-        else 
+        else
         {
             speed = WALKING_SPEED;
         }
 
-        if (controlEnabled == true)
-        {
-            if (Input.GetKey(KeyCode.W))
+            if (controlEnabled == true)
             {
-                transform.position += speed * transform.forward * Time.deltaTime;
-            }
-            if (Input.GetKey(KeyCode.A))
-            {
-                transform.position -= speed * transform.right * Time.deltaTime;
-            }
-            if (Input.GetKey(KeyCode.S))
-            {
-                transform.position -= speed * transform.forward * Time.deltaTime;
-            }
-            if (Input.GetKey(KeyCode.D))
-            {
-                transform.position += speed * transform.right * Time.deltaTime;
-            }
+                if (Input.GetKey(KeyCode.W))
+                {
+                    transform.position += speed * transform.forward * Time.deltaTime;
+                }
+                if (Input.GetKey(KeyCode.A))
+                {
+                    transform.position -= speed * transform.right * Time.deltaTime;
+                }
+                if (Input.GetKey(KeyCode.S))
+                {
+                    transform.position -= speed * transform.forward * Time.deltaTime;
+                }
+                if (Input.GetKey(KeyCode.D))
+                {
+                    transform.position += speed * transform.right * Time.deltaTime;
+                }
 
-            if (Input.GetMouseButtonDown(0))
-            {
-                myGun.triggerPressed();
-            }
+                if (Input.GetMouseButtonDown(0))
+                {
+                    myGun.triggerPressed();
+                }
 
-            if (Input.GetMouseButton(0))
-            {
-                myGun.triggerHeld();
-            }
+                if (Input.GetMouseButton(0))
+                {
+                    myGun.triggerHeld();
+                }
+
+            transform.Rotate(Vector3.up, Input.GetAxis("Horizontal"));
+            camera.UpdatePosition(this, Input.GetAxis("Vertical"));
         }
 
         if (!Input.GetMouseButton(0))
@@ -74,18 +77,17 @@ public class Player_Control : MonoBehaviour
             myGun.triggerReleased();
         }
 
-        transform.Rotate(Vector3.up, Input.GetAxis("Horizontal"));
-        camera.UpdatePosition(this, Input.GetAxis("Vertical"));
-    }
 
-    void DisableControl()
-    {
-        controlEnabled = false;
     }
 
     // FixedUpdate is called once per game tick
     void FixedUpdate()
     {
-        
+
+    }
+
+    internal void disablePlayerControl()
+    {
+        controlEnabled = false;
     }
 }

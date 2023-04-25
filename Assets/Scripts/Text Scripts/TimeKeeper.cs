@@ -4,9 +4,11 @@ using UnityEngine;
 using TMPro;
 
 public class TimeKeeper : MonoBehaviour
+
 {
-    //Player_Control player;
-    float maxTime = 90;
+    EndCard endReport;
+    Player_Control player;
+    float maxTime = 3;
     float currentTime;
     bool timerStopped;
 
@@ -15,7 +17,8 @@ public class TimeKeeper : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //player = FindObjectOfType<Player_Control>;
+        player = FindObjectOfType<Player_Control>();
+        endReport = FindObjectOfType<EndCard>();
         timeText = GetComponent<TMP_Text>();
         timeText.text= "Time Remaining: " + maxTime.ToString("0.00") + "s";
         startTimer();
@@ -34,6 +37,7 @@ public class TimeKeeper : MonoBehaviour
         {
             currentTime = 0;
             stopTimer();
+            endReport.showEndCard();
             //Player_Control.DisableControl;
         }
         
@@ -48,5 +52,6 @@ public class TimeKeeper : MonoBehaviour
     internal void stopTimer()
     {
         timerStopped = true;
+        player.disablePlayerControl();
     }
 }
