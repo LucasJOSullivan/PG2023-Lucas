@@ -5,14 +5,15 @@ using TMPro;
 
 public class ScoreTracker : MonoBehaviour
 {
-    EndCard scoreReport;
+    //EndCard endReport;
     TargetHealth tracker;
-    int score = 0;
+    public int score;
     TMP_Text scoreText;
+
     // Start is called before the first frame update
     void Start()
     {
-        scoreReport = FindObjectOfType<EndCard>();
+        //endReport = FindObjectOfType<EndCard>();
         scoreText = GetComponent<TMP_Text>();
         score = 0;
         displayScore();
@@ -46,14 +47,5 @@ public class ScoreTracker : MonoBehaviour
     internal void hideScore()
     {
         scoreText.text = "";
-    }
-
-    public void getScore()
-    {
-        this.score = score;
-    }
-
-    internal void blank()
-    {
     }
 }

@@ -10,7 +10,7 @@ public class EndCard : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //scoreReport.
+        scoreReport = FindObjectOfType<ScoreTracker>();
         cardText = GetComponent<TMP_Text>();
         cardText.text = "";
     }
@@ -23,10 +23,6 @@ public class EndCard : MonoBehaviour
 
     internal void showEndCard()
     {
-        /*
-        endScore = scoreReport.getScore();
-        endScore = scoreReport.score();
-        */
-        cardText.text = "Game Over \n\nYour score is: " /*+ scoreReport.score*/;
+        cardText.text = "Game Over \n\nYour score is: " + scoreReport.score;
     }
 }
