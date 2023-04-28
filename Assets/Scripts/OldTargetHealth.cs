@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TargetHealth : MonoBehaviour, IHealth
+public class OldTargetHealth : MonoBehaviour, IHealth
 {
     ScoreTracker playerScore;
     GameObject scoreObject;
@@ -14,7 +14,7 @@ public class TargetHealth : MonoBehaviour, IHealth
     public float volume = 0.5f;
     float value;
 
-    public Transform spawnPoint, templateOne, templateTwo;
+    public Transform spawnPoint, template;
 
 
 
@@ -75,8 +75,9 @@ public class TargetHealth : MonoBehaviour, IHealth
         {
             print("Could not increment player score.");
         }
-        Instantiate(templateOne, spawnPoint.position, spawnPoint.rotation);
-        Instantiate(templateTwo, spawnPoint.position, spawnPoint.rotation);
+        Instantiate(template, spawnPoint.position, spawnPoint.rotation);
+
+        FindObjectOfType<SpawnerScript>().IveBeenDestroyed(transform.parent);
         Destroy(transform.parent.gameObject);
     }
 }

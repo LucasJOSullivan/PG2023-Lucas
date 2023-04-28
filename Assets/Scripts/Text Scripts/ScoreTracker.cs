@@ -6,7 +6,7 @@ using TMPro;
 public class ScoreTracker : MonoBehaviour
 {
     //EndCard endReport;
-    TargetHealth tracker;
+    OldTargetHealth tracker;
     public int score;
     TMP_Text scoreText;
 

@@ -5,28 +5,27 @@ using UnityEngine;
 
 public class SpawnerScript : MonoBehaviour
 {
-    public Transform cloneTemplate;
-
+    public Transform template, spawnPoint;
+    float lifetime;
     // Start is called before the first frame update
     void Start()
     {
-      spawnLocationScript[] allLocations = FindObjectsOfType<spawnLocationScript>();
-
-      foreach (spawnLocationScript location in allLocations)
-        {
-            Instantiate(cloneTemplate, location.transform.position, Quaternion.LookRotation( (Camera.main.transform.position - location.transform.position).normalized ), location.transform);
-        }
+        lifetime = 5;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        lifetime -= Time.deltaTime;
+        if (lifetime <= 0)
+        {
+            Instantiate(template, spawnPoint.position, spawnPoint.rotation);
+            Destroy(gameObject);
+        }
     }
 
     internal void IveBeenDestroyed(Transform parent)
     {
-        print("Hello");
-        Instantiate(cloneTemplate, parent.position, Quaternion.LookRotation((Camera.main.transform.position - parent.position).normalized), parent);
+
     }
 }

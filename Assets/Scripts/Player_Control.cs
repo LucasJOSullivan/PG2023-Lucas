@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class Player_Control : MonoBehaviour
 {
-    bool controlEnabled;
+    bool controlEnabled, gameStarted;
     IShoot myGun;
+    TimeKeeper timeStarter;
+    StopCard cardToggle;
     //public Transform spawnpoint, bulletCloneTemplate;
     FPSCameraScript camera;
     private float speed;
@@ -15,17 +17,32 @@ public class Player_Control : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        controlEnabled = true;
+        disablePlayerControl();
+        gameStarted = false;
+        timeStarter = FindObjectOfType<TimeKeeper>();
+        cardToggle = FindObjectOfType<StopCard>();
         speed = WALKING_SPEED;
         turnSpeed = WALKING_TURN;
         camera = FindObjectOfType<FPSCameraScript>();
-
         myGun = camera.GetComponentInChildren<IShoot>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        timeStarter.hideTimer();
+        if (gameStarted == false)
+        {
+            if (Input.GetKey(KeyCode.Space))
+            {
+                enablePlayerControl();
+                timeStarter.startTimer();
+                gameStarted = true;
+                cardToggle.hideStopCard();
+
+            }
+        }
+
         if (Input.GetKey(KeyCode.LeftShift) && (!Input.GetKey(KeyCode.LeftControl)))
         {
             speed = RUNNING_SPEED;
@@ -84,6 +101,11 @@ public class Player_Control : MonoBehaviour
     void FixedUpdate()
     {
 
+    }
+
+    internal void enablePlayerControl()
+    {
+        controlEnabled = true;
     }
 
     internal void disablePlayerControl()

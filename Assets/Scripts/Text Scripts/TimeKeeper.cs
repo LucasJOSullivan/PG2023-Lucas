@@ -6,25 +6,24 @@ using TMPro;
 public class TimeKeeper : MonoBehaviour
 
 {
-    ScoreTracker scoreHide;
-    EndCard endReport;
+    ScoreTracker scoreToggle;
+    StopCard endReport;
     Player_Control player;
-    float maxTime = 10;
+    float maxTime = 30;
     float currentTime;
     bool timerStopped;
-
-
     TMP_Text timeText;
     // Start is called before the first frame update
     void Start()
     {
-        scoreHide = FindObjectOfType<ScoreTracker>();
-        player = FindObjectOfType<Player_Control>();
-
-        endReport = FindObjectOfType<EndCard>();
         timeText = GetComponent<TMP_Text>();
-        timeText.text= "Time Remaining: " + maxTime.ToString("0.00") + "s";
-        startTimer();
+        endReport = FindObjectOfType<StopCard>();
+        scoreToggle = FindObjectOfType<ScoreTracker>();
+        player = FindObjectOfType<Player_Control>();
+        currentTime = maxTime;
+        timerStopped = true;
+        timeText.text= "";
+        scoreToggle.hideScore();
     }
 
     // Update is called once per frame
@@ -33,30 +32,36 @@ public class TimeKeeper : MonoBehaviour
         if (timerStopped == false)
         {
             currentTime -= Time.deltaTime;
+            timeText.text = "Time Remaining: " + currentTime.ToString("0.00") + "s";
         }
 
-        timeText.text = "Time Remaining: " + currentTime.ToString("0.00") + "s";
         if (currentTime <= 0)
         {
             currentTime = 0;
             stopTimer();
-            endReport.showEndCard();
+            endReport.showStopCard();
             //Player_Control.DisableControl;
         }
         
     }
 
+    internal void hideTimer()
+    {
+        timeText.text = "";
+    }
+
     internal void startTimer()
     {
-        currentTime = maxTime;
+        timeText.text = "Time Remaining: " + currentTime.ToString("0.00") + "s";
         timerStopped = false;
+        scoreToggle.displayScore();
     }
 
     internal void stopTimer()
     {
         timerStopped = true;
-        timeText.text = "";
-        scoreHide.hideScore();
         player.disablePlayerControl();
+        timeText.text = "";
+        scoreToggle.hideScore();
     }
 }
