@@ -66,15 +66,7 @@ public class TargetHealth : MonoBehaviour, IHealth
 
     public void selfDestruct()
     {
-
-        try
-        {
-            playerScore.addScore();
-        }
-        catch
-        {
-            print("Could not increment player score.");
-        }
+        playerScore.addScore();
         Instantiate(templateOne, spawnPoint.position, spawnPoint.rotation);
         Instantiate(templateTwo, spawnPoint.position, spawnPoint.rotation);
         Destroy(transform.parent.gameObject);
