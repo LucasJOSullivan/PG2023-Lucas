@@ -258,7 +258,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   source: {fileID: 1484582196781615093}
   clip: {fileID: 8300000, guid: c97ff3ef6848bd24b8bf85eba733305a, type: 3}
-  volume: 0.5
+  volume: 0.3
   spawnPoint: {fileID: 1484582195253623763}
   templateOne: {fileID: 4512965711378551218, guid: 91ea20efe4d12f045b7b59ab312b2b15, type: 3}
   templateTwo: {fileID: 7431646147778369146, guid: 592da05b91cc79d46a436c264167610a, type: 3}

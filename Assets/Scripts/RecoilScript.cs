@@ -54,7 +54,6 @@ public class RecoilScript : MonoBehaviour
         switch(currently)
         {
             case recoilState.Recoiling:
-
                 transform.localPosition = Vector3.Lerp(startingPosition, destination, timer/recoilTime);
                 transform.localRotation = Quaternion.Slerp(startingOrientation, destinationOrientation, timer/recoilTime);
 
@@ -63,7 +62,6 @@ public class RecoilScript : MonoBehaviour
                 if (timer > recoilTime )
                 {
                     currently = recoilState.Returning;
-
                     startingPosition = destination;
                     destination = defaultPosition;
                     startingOrientation = destinationOrientation;
@@ -74,10 +72,7 @@ public class RecoilScript : MonoBehaviour
 
 
 
-            case recoilState.Returning:
-
-
-                
+            case recoilState.Returning:               
                 transform.localPosition = Vector3.Lerp(startingPosition, destination, timer/returnTime);
                 transform.localRotation = Quaternion.Slerp(startingOrientation, destinationOrientation, timer/returnTime);
                 
@@ -90,8 +85,6 @@ public class RecoilScript : MonoBehaviour
                     aim.recoilOver();
                     currently = recoilState.None;
                 }
-
-
                 break;
 
         }
